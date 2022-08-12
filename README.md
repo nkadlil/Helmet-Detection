@@ -21,26 +21,26 @@ This pt file will be copied into the Jetson Nano for inference later.
 ## 1. Create a new fresh environment with Python Version 3.8
 `conda create -n myenv python=3.8`
 ## 2. Clone the YoloV5 repo
+   -  Create a folder for the project and cd into the folder
    - `git clone https://github.com/ultralytics/yolov5`
    - `cd yolov5`
-   - `pip install -r requirements.txt`
 ## 3. Modify requirements.txt
    - Locate and open YoloV5 directory
    - Open requirements.txt using text editor
-   - Comment #torch>=1.7.0 #torchvision>=0.8.1
+   - Comment #torch>=1.7.0 and #torchvision>=0.8.1
+   - run - `pip install -r requirements.txt`
 ## 4. Install PyTorch
    - `git clone --recursive --branch 1.7 http://github.com/pytorch/pytorch`
    - `cd pytorch`
    - `python3.8 -m pip install -r requirements.txt`
    - `python3.8 setup.py install`
  ## 5. Install torchvision
-   - `git clone https://github.com/pytorch/vision`
-   - `cd vision/`
-   - `git checkout v0.8.`
-   - `python3 setup.py bdist_wheel`
-   - `python3 -m pip install dist/torchvision-0.8.0a0+291f7e2-cp38-cp38-linux_aarch64.whl`
+   - Pre-install some required lib `sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev`
+   - Git clone the torchvision repo: `git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision`
+   - Cd into the vision folder: `cd torchvision/`
+   - Run the setup.py: `python setup.py install`
    
-## Check GPU
+## Check GPU 
 1. cd to HOME
 2. Activate python3 by inserting `python3`
 3. `import torch`
@@ -50,19 +50,20 @@ This pt file will be copied into the Jetson Nano for inference later.
 7. `torch.cuda.device_count()`
 8. `torch.cuda.get_device_name(0)`
 
-## Jetson Nano Inference
-1. Activate the environment.
-2. Cd into the yolov5 directory.
+## Running the Inference
+1. Activate the environment `source activate 'name env' `
+2. Cd into your folder project and yolov5 directory.
 3. Copy the trained yolo file which is the pt file and paste into the "models" folder under the "Yolov5" directory.
 4. Run the inference: `python detect.py --weights ./models/model.pt --conf 0.45 --source 0` 
+
 #model.pt is the name of the model
 #conf is the min confidence level for detection 
 #source 0 will use the webcam
-#source image.jpg for image
-#video.mp4 for video  
+#source image.jpg for image inference
+#source video.mp4 for video inference
 
 ## Appreciation
-Thank you for all the lecturers, facilitators, friends and family for helping me to develop the project. Any kind of improvement or suggestions are most welcomed.
+I would like to thank all lecturers, facilitators, friends and family for helping me to develop the project. Any kind of improvement or suggestions are most welcomed.
    
    
    
